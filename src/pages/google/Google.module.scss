@@ -1,0 +1,151 @@
+@use '../../styles/app' as *;
+
+.root {
+  min-height: 100%;
+}
+
+.mapWidget {
+  height: 100%;
+}
+
+.mapHeader {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.headerIcon {
+  color: $brand-primary;
+}
+
+.mapSubtitle {
+  color: $gray-500;
+  font-size: $font-size-small;
+  margin: 0;
+}
+
+.mapViewport {
+  background:
+    linear-gradient(135deg, rgba($brand-secondary, 0.3), rgba($brand-primary, 0.04)),
+    $white;
+  border: 1px solid rgba($brand-primary, 0.08);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.5rem 3rem rgba($gray-900, 0.08);
+  min-height: 32rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.embed {
+  border: 0;
+  display: block;
+  height: 100%;
+  min-height: 32rem;
+  width: 100%;
+}
+
+.mapOverlay {
+  backdrop-filter: blur(10px);
+  background: rgba($white, 0.88);
+  border: 1px solid rgba($brand-primary, 0.1);
+  border-radius: 0.9rem;
+  bottom: 1rem;
+  box-shadow: 0 1rem 2rem rgba($gray-900, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  left: 1rem;
+  max-width: min(18rem, calc(100% - 2rem));
+  padding: 0.85rem 1rem;
+  position: absolute;
+}
+
+.overlayLabel {
+  color: $gray-500;
+  font-size: 0.72rem;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.overlayMeta {
+  color: $gray-500;
+  font-size: $font-size-small;
+}
+
+.metaCard {
+  background:
+    radial-gradient(circle at top right, rgba($brand-secondary, 0.18), transparent 40%),
+    $white;
+  border: 1px solid rgba($brand-primary, 0.08);
+  border-radius: 1rem;
+  padding: 1.15rem;
+}
+
+.metaBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.metaLead {
+  color: $gray-500;
+  font-size: $font-size-small;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.metaList {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
+  margin: 0;
+
+  dt {
+    align-items: center;
+    color: $gray-500;
+    display: inline-flex;
+    font-size: 0.74rem;
+    font-weight: $font-weight-bold;
+    gap: 0.45rem;
+    letter-spacing: 0.06em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+.metaIcon {
+  color: $brand-primary;
+}
+
+.externalLink {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+  width: 100%;
+}
+
+.metaHint {
+  color: $gray-500;
+  font-size: $font-size-small;
+  margin: 0.9rem 0 0;
+}
+
+@include media-breakpoint-down(md) {
+  .mapHeader {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mapViewport,
+  .embed {
+    min-height: 24rem;
+  }
+}

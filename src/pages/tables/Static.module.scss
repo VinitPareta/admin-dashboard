@@ -1,0 +1,74 @@
+@use '../../styles/app' as *;
+
+.mainTable {
+  margin-bottom: 1rem;
+
+  > :not(caption) > * > * {
+    border-bottom: 0;
+    border-top: 1px solid $gray-200;
+    padding: 1.25rem 1rem;
+    vertical-align: middle;
+  }
+
+  > thead > tr > * {
+    color: $gray-500;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+.selectionCheck {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.selectionInput {
+  appearance: none;
+  background: $white;
+  border: 1px solid $gray-300;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  height: 1rem;
+  margin: 0;
+  position: relative;
+  transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
+  width: 1rem;
+
+  &:hover {
+    border-color: $brand-primary;
+  }
+
+  &:focus-visible {
+    border-color: $brand-primary;
+    box-shadow: 0 0 0 0.2rem rgba($brand-primary, 0.18);
+    outline: 0;
+  }
+
+  &:checked {
+    background: $brand-primary;
+    border-color: $brand-primary;
+  }
+
+  &:checked::after {
+    border: solid $white;
+    border-width: 0 2px 2px 0;
+    content: '';
+    height: 0.5rem;
+    left: 0.31rem;
+    position: absolute;
+    top: 0.1rem;
+    transform: rotate(45deg);
+    width: 0.22rem;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}

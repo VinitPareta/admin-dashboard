@@ -1,0 +1,124 @@
+@use 'sass:math';
+@use './app' as *;
+
+$margin-vertical-variants: (
+  xlg: 40px,
+  lg: math.div($line-height-computed * 3, 2),
+  md: $line-height-computed,
+  sm: math.div($line-height-computed, 2),
+  xs: math.div($line-height-computed, 4),
+  0: 0,
+);
+$margin-horizontal-variants: (lg: 20px, md: 15px, sm: 10px, xs: 5px, 0: 0);
+
+@include property-variants('.mt', 'margin-top', $margin-vertical-variants);
+@include property-variants('.mb', 'margin-bottom', $margin-vertical-variants);
+@include property-variants('.ml', 'margin-left', $margin-horizontal-variants);
+@include property-variants('.mr', 'margin-right', $margin-horizontal-variants);
+
+$opacity-variants: (10: 0.1, 20: 0.2, 30: 0.3, 40: 0.4, 50: 0.5, 60: 0.6, 70: 0.7, 80: 0.8, 90: 0.9);
+
+@include property-variants('.opacity', 'opacity', $opacity-variants);
+
+.fw-thin {
+  font-weight: 300;
+}
+
+.fw-normal {
+  font-weight: 400;
+}
+
+.fw-semi-bold {
+  font-weight: 600;
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+.fs-sm {
+  font-size: $font-size-small;
+}
+
+.fs-mini {
+  font-size: $font-size-index;
+}
+
+.width-100 {
+  width: 100px;
+}
+
+.text-default {
+  color: $text-color;
+}
+
+.text-gray {
+  color: $gray-500 !important;
+}
+
+.text-gray-light {
+  color: $gray-100 !important;
+}
+
+.text-gray-dark {
+  color: $gray-700 !important;
+}
+
+.text-inverse {
+  color: theme-color('inverse') !important;
+}
+
+.bg-dark {
+  background-color: $text-color !important;
+  color: $white !important;
+}
+
+.bg-default {
+  background-color: theme-color('default') !important;
+  color: $text-color !important;
+}
+
+.bg-gray {
+  background-color: theme-color('gray') !important;
+  color: $gray-900 !important;
+}
+
+.bg-inverse {
+  background-color: theme-color('inverse') !important;
+  color: $white !important;
+}
+
+.td-underline {
+  text-decoration: underline;
+}
+
+.btn-rounded,
+.btn-rounded-f {
+  border-radius: 999px !important;
+}
+
+.circle {
+  align-items: center;
+  border-radius: 50%;
+  display: inline-flex;
+  height: 1.75rem;
+  justify-content: center;
+  width: 1.75rem;
+}
+
+.widget-table-overflow {
+  margin: 0 #{-$widget-padding-x} #{-$widget-padding-y};
+  overflow-x: auto;
+
+  .table {
+    margin-bottom: 0;
+  }
+
+  .table > :not(caption) > * > :first-child {
+    padding-left: $widget-padding-x;
+  }
+
+  .table > :not(caption) > * > :last-child {
+    padding-right: $widget-padding-x;
+  }
+}

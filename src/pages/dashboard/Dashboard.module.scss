@@ -1,0 +1,219 @@
+/**
+ * Flatlogic Dashboards (https://flatlogic.com/admin-dashboards)
+ *
+ * Copyright © 2015-present Flatlogic, LLC. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+
+ @use '../../styles/app' as *;
+
+ .root {
+   // styles here
+ }
+ 
+ .usersTable {
+   th,
+   td {
+     border-color: $white;
+   }
+ 
+   thead {
+     border-bottom: 1px solid $gray-200;
+   }
+ }
+
+.recentPostsOptions {
+  color: $gray-500;
+  font-size: $font-size-small;
+  text-decoration: underline;
+
+  &:hover,
+  &:focus-visible {
+    color: $brand-primary;
+  }
+}
+
+.recentPostsCount {
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.55rem;
+}
+
+.recentPostsHint {
+  color: $gray-500;
+  font-size: $font-size-small;
+  margin: 0.4rem 0 0;
+}
+
+.recentPostsTable {
+  margin-top: 0.85rem;
+
+  > tbody > tr > td {
+    border-top: 1px solid rgba($brand-primary, 0.08);
+    padding-bottom: 0.9rem;
+    padding-top: 0.9rem;
+  }
+
+  > tbody > tr:first-child > td {
+    border-top: 0;
+  }
+}
+
+.recentPostDate {
+  color: $gray-500;
+  font-size: 0.73rem;
+  font-weight: $font-weight-bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: 8.5rem;
+}
+
+.recentPostTitleCell {
+  width: 100%;
+}
+
+.recentPostLink {
+  color: $text-color;
+  display: inline-flex;
+  font-weight: $font-weight-semi-bold;
+  line-height: 1.35;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    color: $brand-primary;
+    text-decoration: underline;
+  }
+}
+
+.recentPostsState {
+  color: $gray-500;
+  font-size: $font-size-small;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.recentPostsFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.9rem;
+}
+
+.recentPostsButton {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.recentPostsTotal {
+  border-radius: 999px;
+  padding: 0.35rem 0.5rem;
+}
+
+.quickLinksList {
+  background:
+    radial-gradient(circle at top right, rgba($brand-secondary, 0.24), transparent 38%),
+    $white;
+  border: 1px solid rgba($brand-primary, 0.08);
+  border-radius: 1rem;
+  box-shadow: 0 1.25rem 2.5rem rgba($gray-900, 0.06);
+  overflow: hidden;
+  padding: 0;
+}
+
+.quickLinkItem {
+  align-items: center;
+  background: transparent;
+  color: $text-color;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: auto 1fr auto;
+  padding: 1rem 1.15rem;
+  text-decoration: none;
+  transition:
+    background-color 0.18s ease-in-out,
+    color 0.18s ease-in-out,
+    transform 0.18s ease-in-out;
+
+  + .quickLinkItem {
+    border-top: 1px solid rgba($brand-primary, 0.08);
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: rgba($brand-primary, 0.05);
+    color: $brand-primary;
+    transform: translateX(3px);
+  }
+}
+
+.quickLinkIcon {
+  align-items: center;
+  background: rgba($brand-primary, 0.08);
+  border-radius: 999px;
+  color: $brand-primary;
+  display: inline-flex;
+  height: 2.35rem;
+  justify-content: center;
+  width: 2.35rem;
+
+  svg {
+    height: 1rem;
+    width: 1rem;
+  }
+}
+
+.quickLinkLabel {
+  font-weight: $font-weight-semi-bold;
+}
+
+.quickLinkBadge {
+  border-radius: 999px;
+  min-width: 2rem;
+  padding: 0.38rem 0.55rem;
+  text-align: center;
+}
+
+.quickLinkArrow {
+  color: $gray-500;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+@include media-breakpoint-down(sm) {
+  .recentPostsTable {
+    > tbody > tr > td {
+      padding-bottom: 0.75rem;
+      padding-top: 0.75rem;
+    }
+  }
+
+  .recentPostDate {
+    display: block;
+    padding-bottom: 0.15rem;
+    width: auto;
+  }
+
+  .recentPostTitleCell {
+    display: block;
+    padding-top: 0;
+  }
+
+  .recentPostsFooter {
+    justify-content: stretch;
+  }
+
+  .recentPostsButton {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .quickLinkItem {
+    padding: 0.9rem 1rem;
+  }
+}
+ 

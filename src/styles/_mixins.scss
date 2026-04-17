@@ -1,0 +1,144 @@
+@use 'sass:color';
+@use 'sass:map';
+@use './variables' as *;
+
+/**
+ * Custom application mixins available through out the app
+ */
+
+$breakpoints: (
+  xs: $screen-xs-min,
+  sm: $screen-sm-min,
+  md: $screen-md-min,
+  lg: $screen-lg-min,
+);
+
+@function breakpoint-min($name) {
+  @return map.get($breakpoints, $name);
+}
+
+@function breakpoint-max($name) {
+  $value: breakpoint-min($name);
+
+  @if $value == null {
+    @return null;
+  }
+
+  @return $value - 0.02px;
+}
+
+@function contrast-color($value, $dark: $gray-900, $light: $white) {
+  @if color.channel($value, 'lightness', $space: hsl) > 60% {
+    @return $dark;
+  }
+
+  @return $light;
+}
+
+@mixin media-breakpoint-up($name) {
+  $min-width: breakpoint-min($name);
+
+  @if $min-width == null {
+    @content;
+  } @else {
+    @media (min-width: $min-width) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-down($name) {
+  $max-width: breakpoint-max($name);
+
+  @if $max-width == null {
+    @content;
+  } @else {
+    @media (max-width: $max-width) {
+      @content;
+    }
+  }
+}
+
+@mixin clearfix() {
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+@mixin box-shadow($shadow...) {
+  box-shadow: $shadow;
+}
+
+@mixin transition($transition...) {
+  transition: $transition;
+}
+
+@mixin button-variant-class($text-color, $background-color, $border-color) {
+  $hover-background: color.scale($background-color, $lightness: -8%);
+  $hover-border: color.scale($border-color, $lightness: -10%);
+  $active-background: color.scale($background-color, $lightness: -12%);
+  $active-border: color.scale($border-color, $lightness: -14%);
+
+  --bs-btn-color: #{$text-color};
+  --bs-btn-bg: #{$background-color};
+  --bs-btn-border-color: #{$border-color};
+  --bs-btn-hover-color: #{$text-color};
+  --bs-btn-hover-bg: #{$hover-background};
+  --bs-btn-hover-border-color: #{$hover-border};
+  --bs-btn-focus-shadow-rgb: #{rgb-values($border-color)};
+  --bs-btn-active-color: #{$text-color};
+  --bs-btn-active-bg: #{$active-background};
+  --bs-btn-active-border-color: #{$active-border};
+  --bs-btn-active-shadow: inset 0 3px 5px rgba($black, 0.125);
+  --bs-btn-disabled-color: #{$text-color};
+  --bs-btn-disabled-bg: #{$background-color};
+  --bs-btn-disabled-border-color: #{$border-color};
+}
+
+@mixin button-outline-variant-class($color, $hover-background: $color, $hover-border: $color) {
+  $hover-text: contrast-color($hover-background);
+  $active-background: color.scale($hover-background, $lightness: -8%);
+  $active-border: color.scale($hover-border, $lightness: -10%);
+
+  --bs-btn-color: #{$color};
+  --bs-btn-border-color: #{$color};
+  --bs-btn-hover-color: #{$hover-text};
+  --bs-btn-hover-bg: #{$hover-background};
+  --bs-btn-hover-border-color: #{$hover-border};
+  --bs-btn-focus-shadow-rgb: #{rgb-values($color)};
+  --bs-btn-active-color: #{$hover-text};
+  --bs-btn-active-bg: #{$active-background};
+  --bs-btn-active-border-color: #{$active-border};
+  --bs-btn-active-shadow: inset 0 3px 5px rgba($black, 0.125);
+  --bs-btn-disabled-color: #{$color};
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #{$color};
+  --bs-gradient: none;
+}
+
+// define sass mixin
+// Generates single property classes
+// -------------------------
+@mixin property-variants($base, $property, $variants: ()) {
+  @each $size, $value in $variants {
+    @if $size == 'md' {
+      #{$base} {
+        #{$property}: $value;
+      }
+
+      #{$base}-n {
+        #{$property}: $value;
+      }
+    }
+
+    #{$base}-#{$size} {
+      #{$property}: $value;
+    }
+
+    #{$base}-n-#{$size} {
+      #{$property}: -$value;
+    }
+  }
+}

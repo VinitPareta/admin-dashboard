@@ -1,0 +1,34 @@
+@use './app' as *;
+@use './general';
+@use './overrides';
+@use './utils';
+
+:root {
+  --bs-font-sans-serif: #{$font-family-base};
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-bg: #{$body-bg};
+  --bs-body-color: #{$text-color};
+  --bs-body-color-rgb: #{rgb-values($text-color)};
+  --bs-link-color: #{$link-color};
+  --bs-link-color-rgb: #{rgb-values($link-color)};
+  --bs-border-radius: #{$border-radius};
+  --bs-border-radius-sm: 0.25rem;
+  --bs-border-radius-lg: 0.5rem;
+  --bs-primary: #{$brand-primary};
+  --bs-primary-rgb: #{rgb-values($brand-primary)};
+  --bs-secondary: #{$brand-secondary};
+  --bs-secondary-rgb: #{rgb-values($brand-secondary)};
+  --bs-success: #{$brand-success};
+  --bs-success-rgb: #{rgb-values($brand-success)};
+  --bs-info: #{$brand-info};
+  --bs-info-rgb: #{rgb-values($brand-info)};
+  --bs-warning: #{$brand-warning};
+  --bs-warning-rgb: #{rgb-values($brand-warning)};
+  --bs-danger: #{$brand-danger};
+  --bs-danger-rgb: #{rgb-values($brand-danger)};
+  --bs-light: #{$gray-300};
+  --bs-light-rgb: #{rgb-values($gray-300)};
+  --bs-dark: #{$gray-800};
+  --bs-dark-rgb: #{rgb-values($gray-800)};
+  --bs-breadcrumb-divider: '#{$breadcrumb-divider}';
+}

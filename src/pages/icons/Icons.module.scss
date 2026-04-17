@@ -1,0 +1,36 @@
+@use '../../styles/app' as *;
+
+.root {
+  :global {
+    .icon-list {
+      margin-top: 1rem;
+    }
+
+    .icon-list-item {
+      height: 32px;
+      font-size: 14px;
+      line-height: 32px;
+
+      > a {
+        color: $text-color;
+        text-decoration: none;
+      }
+
+      .bi {
+        width: 32px;
+        margin-right: 10px;
+      }
+
+      &:hover {
+        .bi {
+          font-size: 28px;
+          top: 2px;
+        }
+
+        .bi {
+          vertical-align: -6px;
+        }
+      }
+    }
+  }
+}
