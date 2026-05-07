@@ -7,22 +7,22 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
- @use '../../styles/app' as *;
+@use "../../styles/app" as *;
 
- .root {
-   // styles here
- }
- 
- .usersTable {
-   th,
-   td {
-     border-color: $white;
-   }
- 
-   thead {
-     border-bottom: 1px solid $gray-200;
-   }
- }
+.root {
+  // styles here
+}
+
+.usersTable {
+  th,
+  td {
+    border-color: $white;
+  }
+
+  thead {
+    border-bottom: 1px solid $gray-200;
+  }
+}
 
 .recentPostsOptions {
   color: $gray-500;
@@ -116,7 +116,11 @@
 
 .quickLinksList {
   background:
-    radial-gradient(circle at top right, rgba($brand-secondary, 0.24), transparent 38%),
+    radial-gradient(
+      circle at top right,
+      rgba($brand-secondary, 0.24),
+      transparent 38%
+    ),
     $white;
   border: 1px solid rgba($brand-primary, 0.08);
   border-radius: 1rem;
@@ -215,5 +219,12 @@
   .quickLinkItem {
     padding: 0.9rem 1rem;
   }
+  .cardHover {
+    transition: all 0.3s ease;
+  }
+
+  .cardHover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
 }
- 

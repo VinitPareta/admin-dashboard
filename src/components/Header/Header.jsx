@@ -97,13 +97,13 @@ const Header = ({ sidebarOpen, sidebarToggle }) => {
             })}
             role="menu"
           >
-            <NavLink
+            {/* <NavLink
               className="dropdown-item"
               to="/app/posts"
               onClick={() => setDropdownOpen(false)}
             >
               Posts
-            </NavLink>
+            </NavLink> */}
             <NavLink
               className="dropdown-item"
               to="/app/profile"
@@ -111,6 +111,13 @@ const Header = ({ sidebarOpen, sidebarToggle }) => {
             >
               Profile
             </NavLink>
+            {/* <NavLink
+              className="dropdown-item"
+              to="/app/user"
+              onClick={() => setDropdownOpen(false)}
+            >
+              Users
+            </NavLink> */}
             <button
               className="dropdown-item"
               onClick={() => {

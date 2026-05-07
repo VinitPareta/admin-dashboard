@@ -1,5 +1,5 @@
-import React, { startTransition, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { startTransition, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Alert,
   Breadcrumb,
@@ -12,12 +12,15 @@ import {
   Input,
   Label,
   Row,
-} from 'reactstrap';
+} from "reactstrap";
 
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { clearPostMessage, createPost } from '../../../features/posts/postsSlice';
-import Widget from '../../../components/Widget';
-import s from './PostNew.module.scss';
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import {
+  clearPostMessage,
+  createPost,
+} from "../../../features/posts/postsSlice";
+import Widget from "../../../components/Widget";
+import s from "./PostNew.module.scss";
 
 const PostNew = () => {
   const dispatch = useAppDispatch();
@@ -26,8 +29,8 @@ const PostNew = () => {
   const message = useAppSelector((state) => state.posts.message);
   const error = useAppSelector((state) => state.posts.error);
   const [formState, setFormState] = useState({
-    title: '',
-    content: '',
+    title: "",
+    content: "",
   });
 
   useEffect(() => () => dispatch(clearPostMessage()), [dispatch]);
@@ -38,9 +41,9 @@ const PostNew = () => {
     const result = await dispatch(createPost(formState));
 
     if (createPost.fulfilled.match(result)) {
-      setFormState({ title: '', content: '' });
+      setFormState({ title: "", content: "" });
       startTransition(() => {
-        navigate('/app/posts', { replace: true });
+        navigate("/app/posts", { replace: true });
       });
     }
   };
@@ -54,7 +57,13 @@ const PostNew = () => {
       <h1>Create new post</h1>
       <Row>
         <Col sm={6}>
-          <Widget title={<span>Add Post <span className="fw-semi-bold">Form</span></span>}>
+          <Widget
+            title={
+              <span>
+                Add Post <span className="fw-semi-bold">Form</span>
+              </span>
+            }
+          >
             <Form onSubmit={handleSubmit}>
               {message ? <Alert color="success">{message}</Alert> : null}
               {error ? <Alert color="danger">{error}</Alert> : null}
@@ -63,7 +72,10 @@ const PostNew = () => {
                 <Input
                   id="input-title"
                   onChange={(event) =>
-                    setFormState((current) => ({ ...current, title: event.target.value }))
+                    setFormState((current) => ({
+                      ...current,
+                      title: event.target.value,
+                    }))
                   }
                   placeholder="Title"
                   required
@@ -77,7 +89,10 @@ const PostNew = () => {
                   className="form-control"
                   id="input-content"
                   onChange={(event) =>
-                    setFormState((current) => ({ ...current, content: event.target.value }))
+                    setFormState((current) => ({
+                      ...current,
+                      content: event.target.value,
+                    }))
                   }
                   placeholder="Post content"
                   required
@@ -87,11 +102,15 @@ const PostNew = () => {
               </FormGroup>
               <div className="d-flex justify-content-end">
                 <ButtonGroup>
-                  <Button color="default" onClick={() => navigate('/app/posts')} type="button">
+                  <Button
+                    color="default"
+                    onClick={() => navigate("/app/posts")}
+                    type="button"
+                  >
                     Cancel
                   </Button>
                   <Button color="danger" type="submit">
-                    {createStatus === 'loading' ? 'Creating...' : 'Create'}
+                    {createStatus === "loading" ? "Creating..." : "Create"}
                   </Button>
                 </ButtonGroup>
               </div>

@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import authReducer from '../features/auth/authSlice';
-import postsReducer from '../features/posts/postsSlice';
-import uiReducer from '../features/ui/uiSlice';
+import authReducer from "../features/auth/authSlice";
+import postsReducer from "../features/posts/postsSlice";
+import uiReducer from "../features/ui/uiSlice";
 
 export const createAppStore = () =>
   configureStore({
@@ -14,7 +14,7 @@ export const createAppStore = () =>
   });
 
 export type AppStore = ReturnType<typeof createAppStore>;
-export type RootState = ReturnType<AppStore['getState']>;
-export type AppDispatch = AppStore['dispatch'];
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];
 
 export const store = createAppStore();

@@ -1,84 +1,141 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { createPostRecord, listPosts, type PostRecord } from './postsService';
+type PostRecord = {
+  _id: string;
+  title: string;
+  content: string;
+  image: string; //  add this
+  updatedAt: string;
+  user?: { email: string };
+};
 
 type CreatePostInput = {
   title: string;
   content: string;
+  image: string;
+  user?: string;
 };
 
 type PostsState = {
   items: PostRecord[];
-  fetchStatus: 'idle' | 'loading' | 'failed';
-  createStatus: 'idle' | 'loading' | 'failed';
+  fetchStatus: "idle" | "loading" | "failed";
+  createStatus: "idle" | "loading" | "failed";
   message: string | null;
   error: string | null;
 };
+const API_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = `${API_URL}/api/posts`;
 
 const initialState: PostsState = {
   items: [],
-  fetchStatus: 'idle',
-  createStatus: 'idle',
+  fetchStatus: "idle",
+  createStatus: "idle",
   message: null,
   error: null,
 };
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => listPosts());
+// FETCH POSTS (API)
+export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+  const res = await fetch(BASE_URL);
+  const data = await res.json();
+  return data.data.posts;
+});
 
+// CREATE POST (API)
 export const createPost = createAsyncThunk<
   PostRecord,
   CreatePostInput,
   { rejectValue: string }
->('posts/createPost', async (payload, { rejectWithValue }) => {
+>("posts/createPost", async (payload, { rejectWithValue }) => {
   try {
-    return await createPostRecord(payload);
+    const res = await fetch(BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+    return data.data.post;
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unable to create post';
-    return rejectWithValue(message);
+    return rejectWithValue("Unable to create post");
   }
 });
 
+//DELETE POST (API)
+export const deletePostAsync = createAsyncThunk(
+  "posts/deletePost",
+  async (id: string) => {
+    await fetch(`${BASE_URL}/${id}`, {
+      method: "DELETE",
+    });
+    return id;
+  },
+);
+
+// UPDATE POST (API)
+export const updatePostAsync = createAsyncThunk(
+  "posts/updatePost",
+  async ({ id, data }: { id: string; data: any }) => {
+    const res = await fetch(`${BASE_URL}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+    return result.data.post;
+  },
+);
+
 const postsSlice = createSlice({
-  name: 'posts',
+  name: "posts",
   initialState,
   reducers: {
     clearPostMessage(state) {
       state.message = null;
       state.error = null;
-      state.createStatus = 'idle';
+      state.createStatus = "idle";
     },
   },
   extraReducers: (builder) => {
     builder
+      // FETCH
       .addCase(fetchPosts.pending, (state) => {
-        state.fetchStatus = 'loading';
-        state.error = null;
+        state.fetchStatus = "loading";
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.fetchStatus = 'idle';
+        state.fetchStatus = "idle";
         state.items = action.payload;
       })
       .addCase(fetchPosts.rejected, (state) => {
-        state.fetchStatus = 'failed';
-        state.error = 'Unable to load posts';
+        state.fetchStatus = "failed";
       })
-      .addCase(createPost.pending, (state) => {
-        state.createStatus = 'loading';
-        state.message = null;
-        state.error = null;
-      })
+
+      // CREATE
       .addCase(createPost.fulfilled, (state, action) => {
-        state.createStatus = 'idle';
-        state.items = [action.payload, ...state.items];
-        state.message = 'Post created successfully';
+        state.items.unshift(action.payload);
       })
-      .addCase(createPost.rejected, (state, action) => {
-        state.createStatus = 'failed';
-        state.error = action.payload ?? 'Unable to create post';
+
+      // DELETE
+      .addCase(deletePostAsync.fulfilled, (state, action) => {
+        state.items = state.items.filter((post) => post._id !== action.payload);
+      })
+
+      // UPDATE
+      .addCase(updatePostAsync.fulfilled, (state, action) => {
+        const index = state.items.findIndex(
+          (post) => post._id === action.payload._id,
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
       });
   },
 });
 
 export const { clearPostMessage } = postsSlice.actions;
-
 export default postsSlice.reducer;

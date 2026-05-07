@@ -1,5 +1,17 @@
-@use '../../../styles/app' as *;
+@use "../../../styles/app" as *;
 
 .root {
   // styles
+}
+.ql-container {
+  height: 120px !important;
+  overflow-y: auto;
+}
+
+.ql-toolbar {
+  z-index: 0 !important;
+}
+
+.ql-container {
+  z-index: 0 !important;
 }

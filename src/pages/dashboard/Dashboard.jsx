@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Alert,
   Badge,
@@ -15,7 +15,7 @@ import {
   Progress,
   Row,
   Table,
-} from 'reactstrap';
+} from "reactstrap";
 import {
   Bell,
   ChatDots,
@@ -23,51 +23,49 @@ import {
   Eye,
   Person,
   Telephone,
-} from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
+} from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchPosts } from '../../features/posts/postsSlice';
-import Widget from '../../components/Widget';
-import s from './Dashboard.module.scss';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 
-const formatDate = (value) =>
-  new Intl.DateTimeFormat('en', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(new Date(value));
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { fetchPosts } from "../../features/posts/postsSlice";
+import Widget from "../../components/Widget";
+import s from "./Dashboard.module.scss";
 
-const quickLinks = [
-  {
-    to: '/app/main',
-    label: 'Incoming calls',
-    icon: Telephone,
-    badge: { color: 'danger', value: '3' },
-  },
-  {
-    to: '/app/notifications',
-    label: 'Notifications',
-    icon: Bell,
-    badge: { color: 'warning', value: '6' },
-  },
-  {
-    to: '/app/posts',
-    label: 'Messages',
-    icon: ChatDots,
-    badge: { color: 'success', value: '18' },
-  },
-  {
-    to: '/app/main',
-    label: 'Visits total',
-    icon: Eye,
-  },
-  {
-    to: '/app/main',
-    label: 'Inbox',
-    icon: Cloud,
-  },
+const chartData = [
+  { name: "Prospect", value: 30 },
+  { name: "Qualified", value: 80 },
+  { name: "Proposal", value: 36 },
+  { name: "Closed", value: 48 },
 ];
+
+const ticketData = [
+  { name: "Open", value: 549 },
+  { name: "Closed", value: 163 },
+  { name: "Pending", value: 89 },
+  { name: "Resolved", value: 187 },
+];
+
+const chartData2 = [
+  { name: "Monday", value: 45 },
+  { name: "Tuesday", value: 57 },
+  { name: " Wednesday", value: 78 },
+  { name: "Thursday", value: 65 },
+  { name: "Friday", value: 88 },
+];
+
+const COLORS = ["#facc15", "#ef4444", "#8b5cf6", "#10b981"];
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
@@ -76,7 +74,7 @@ const Dashboard = () => {
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
 
   useEffect(() => {
-    if (fetchStatus === 'idle' && posts.length === 0) {
+    if (fetchStatus === "idle" && posts.length === 0) {
       dispatch(fetchPosts());
     }
   }, [dispatch, fetchStatus, posts.length]);
@@ -89,211 +87,141 @@ const Dashboard = () => {
         <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
         <BreadcrumbItem active>Dashboard</BreadcrumbItem>
       </Breadcrumb>
+
       <h1 className="mb-lg">Dashboard</h1>
+
+      {/* new section that we add */}
       <Row>
-        <Col md={6} sm={12}>
-          <Widget
-            title={(
-              <div>
-                <div className="pull-right mt-n-xs">
-                  <input
-                    className="form-control input-sm"
-                    placeholder="Search..."
-                    type="search"
-                  />
-                </div>
-                <h5 className="mt-0 mb-3">
-                  <Person className="me-2 opacity-75" />
-                  Users
-                </h5>
-              </div>
-            )}
+        <Col md={6}>
+          <motion.div
+            className={s.cardHover}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
           >
-            <Table borderless className="mb-0" responsive>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ['1', 'Alice', 'alice@email.com', 'active', 'success'],
-                  ['2', 'Bob', 'bob@email.com', 'delayed', 'warning'],
-                  ['3', 'Duck', 'duck@email.com', 'active', 'success'],
-                  ['4', 'Shepherd', 'shepherd@email.com', 'removed', 'danger'],
-                ].map(([id, username, email, status, color]) => (
-                  <tr key={id}>
-                    <td>{id}</td>
-                    <td>{username}</td>
-                    <td>{email}</td>
-                    <td>
-                      <span className={`py-0 px-1 rounded text-white bg-${color}`}>{status}</span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Widget>
+            <Widget title="Conversion">
+              <ResponsiveContainer width="100%" height={200}>
+                {/* this is the for the first graph with prospect and qualified */}
+                <BarChart data={chartData}>
+                  <XAxis dataKey="name" />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="#8b5cf6" radius={[10, 10, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </Widget>
+          </motion.div>
         </Col>
-        <Col md={6} sm={12}>
-          <Widget title="Alerts">
-            <Alert className="alert-sm" color="warning">
-              <span className="fw-semi-bold">Warning:</span> Track dependency drift proactively.
-            </Alert>
-            <Alert className="alert-sm" color="success">
-              <span className="fw-semi-bold">Success:</span> The template now boots on a modern runtime.
-            </Alert>
-            <Alert className="alert-sm" color="info">
-              <span className="fw-semi-bold">Info:</span> Demo data is local-first and easy to replace.
-            </Alert>
-            <Alert className="alert-sm d-flex justify-content-between align-items-center" color="danger">
-              <span>
-                <span className="fw-semi-bold">Action:</span> Connect a real API before production.
-              </span>
-              <div className="d-flex align-items-center gap-2">
-                <Button color="danger" size="sm">
-                  Review
-                </Button>
-                <Button color="default" size="sm">
-                  Ignore
-                </Button>
-              </div>
-            </Alert>
-          </Widget>
+
+        <Col md={6}>
+          <motion.div
+            className={s.cardHover}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            <Widget title="Product Performance">
+              <div>Revenue</div>
+              <Progress animated color="warning" value={80}>
+                {/* progress component gives us the horizontal bar graph */}
+                $8,450
+              </Progress>
+
+              <div className="mt-3">Orders</div>
+              <Progress animated color="danger" value={60}>
+                2,250
+              </Progress>
+
+              <div className="mt-3">Conversion</div>
+              <Progress animated color="success" value={70}>
+                +56.7%
+              </Progress>
+            </Widget>
+          </motion.div>
         </Col>
       </Row>
-      <Row>
-        <Col sm={6}>
-          <Widget
-            title={(
-              <div>
-                <div className="pull-right mt-n-xs">
-                  <Link className={s.recentPostsOptions} to="/app/main">
-                    Options
-                  </Link>
-                </div>
-                <h5 className="mt-0 mb-0 d-flex align-items-center flex-wrap gap-2">
-                  Recent posts
-                  <Badge className={s.recentPostsCount} color="success" pill>
-                    {recentPosts.length}
-                  </Badge>
-                </h5>
-                <p className={s.recentPostsHint}>Latest entries from the local demo feed.</p>
-              </div>
-            )}
+
+      <Row className="mt-lg">
+        <Col md={6}>
+          <motion.div
+            className={s.cardHover}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
           >
-            <table className={`table table-sm table-no-border mb-0 ${s.recentPostsTable}`}>
-              <tbody>
-                {recentPosts.map((post) => (
-                  <tr key={post.id} className={s.recentPostRow}>
-                    <td className={s.recentPostDate}>{formatDate(post.updatedAt)}</td>
-                    <td className={s.recentPostTitleCell}>
-                      <Link className={s.recentPostLink} to="/app/posts">
-                        {post.title}
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-                {fetchStatus === 'loading' ? (
-                  <tr>
-                    <td className={s.recentPostsState} colSpan="2">
-                      Loading...
-                    </td>
-                  </tr>
-                ) : null}
-                {fetchStatus !== 'loading' && recentPosts.length === 0 ? (
-                  <tr>
-                    <td className={s.recentPostsState} colSpan="2">
-                      No posts yet.
-                    </td>
-                  </tr>
-                ) : null}
-              </tbody>
-            </table>
-            <div className={s.recentPostsFooter}>
-              <Link className={`btn btn-default ${s.recentPostsButton}`} to="/app/posts">
-                View all Posts
-                <Badge className={s.recentPostsTotal} color="danger" pill>
-                  {posts.length}
-                </Badge>
-              </Link>
-            </div>
-          </Widget>
+            <Widget title="Support Tickets">
+              <ResponsiveContainer width="100%" height={200}>
+                <PieChart>
+                  {/* this is the pie chart */}
+                  <Pie data={ticketData} dataKey="value" outerRadius={80}>
+                    {ticketData.map((entry, index) => (
+                      <Cell key={index} fill={COLORS[index]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </Widget>
+          </motion.div>
         </Col>
-        <Col sm={6}>
-          <ListGroup className={s.quickLinksList}>
-            {quickLinks.map(({ badge, icon: ShortcutIcon, label, to }) => (
-              <Link className={s.quickLinkItem} key={label} to={to}>
-                <span className={s.quickLinkIcon}>
-                  <ShortcutIcon aria-hidden="true" />
-                </span>
-                <span className={s.quickLinkLabel}>{label}</span>
-                {badge ? (
-                  <Badge className={s.quickLinkBadge} color={badge.color} pill>
-                    {badge.value}
-                  </Badge>
-                ) : (
-                  <span aria-hidden="true" className={s.quickLinkArrow}>
-                    →
-                  </span>
-                )}
-              </Link>
-            ))}
-          </ListGroup>
+
+        <Col md={6}>
+          <motion.div className={s.cardHover}>
+            <Widget title="User Profit">
+              <ResponsiveContainer width="100%" height={200}>
+                {/* this is the for profit data */}
+                <BarChart data={chartData2}>
+                  <XAxis dataKey="name" />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="#10b981" radius={[10, 10, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </Widget>
+          </motion.div>
         </Col>
       </Row>
-      <Widget className="mt-lg" title="Some standard reactstrap components">
-        <Row>
-          <Col sm={6}>
-            <div className="mt">
-              <Button className="mr-sm mb-xs" color="default" size="sm">
-                Default
-              </Button>
-              <Button className="mr-sm mb-xs" color="success" size="sm">
-                Success
-              </Button>
-              <Button className="mr-sm mb-xs" color="info" size="sm">
-                Info
-              </Button>
-              <Button className="mr-sm mb-xs" color="warning" size="sm">
-                Warning
-              </Button>
-              <Button className="mb-xs" color="danger" size="sm">
-                Danger
-              </Button>
-            </div>
-            <ButtonGroup className="mb">
-              <Button color="default">1</Button>
-              <Button color="default">2</Button>
-              <ButtonDropdown isOpen={isDropdownOpened} toggle={() => setIsDropdownOpened((value) => !value)}>
-                <DropdownToggle caret color="default">
-                  Dropdown
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem>1</DropdownItem>
-                  <DropdownItem>2</DropdownItem>
-                </DropdownMenu>
-              </ButtonDropdown>
-            </ButtonGroup>
-            <p className="mb-0">
-              For more components, check the{' '}
-              <a href="https://reactstrap.github.io/" rel="noreferrer" target="_blank">
-                reactstrap documentation
-              </a>
-              .
-            </p>
-          </Col>
-          <Col sm={6}>
-            <Progress className="progress-sm" color="success" value={40} />
-            <Progress className="progress-sm" color="info" value={20} />
-            <Progress className="progress-sm" color="warning" value={60} />
-            <Progress className="progress-sm" color="danger" value={80} />
-          </Col>
-        </Row>
-      </Widget>
+
+      {/*not change already existing table*/}
+      <Row className="mt-lg">
+        <Col md={6}>
+          <motion.div className={s.cardHover}>
+            <Widget title="Users">
+              <Table borderless responsive>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1", "Alice", "alice@email.com", "active", "success"],
+                    ["2", "Bob", "bob@email.com", "delayed", "warning"],
+                    ["3", "Duck", "duck@email.com", "active", "success"],
+                  ].map(([id, username, email, status, color]) => (
+                    <tr key={id}>
+                      <td>{id}</td>
+                      <td>{username}</td>
+                      <td>{email}</td>
+                      <td>
+                        <span className={`badge bg-${color}`}>{status}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Widget>
+          </motion.div>
+        </Col>
+
+        <Col md={6}>
+          <motion.div className={s.cardHover}>
+            <Widget title="Alerts">
+              <Alert color="warning">Warning message</Alert>
+              <Alert color="success">Success message</Alert>
+              <Alert color="info">Info message</Alert>
+            </Widget>
+          </motion.div>
+        </Col>
+      </Row>
     </div>
   );
 };

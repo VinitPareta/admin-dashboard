@@ -1,11 +1,10 @@
-import React, { startTransition, useDeferredValue, useMemo, useState } from 'react';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  Col,
-  Input,
-  Row,
-} from 'reactstrap';
+import React, {
+  startTransition,
+  useDeferredValue,
+  useMemo,
+  useState,
+} from "react";
+import { Breadcrumb, BreadcrumbItem, Col, Input, Row } from "reactstrap";
 import {
   Alarm as AlarmIcon,
   AppIndicator as AppIndicatorIcon,
@@ -61,76 +60,76 @@ import {
   Upload as UploadIcon,
   Wifi as WifiIcon,
   Wrench as WrenchIcon,
-} from 'react-bootstrap-icons';
+} from "react-bootstrap-icons";
 
-import Widget from '../../components/Widget';
-import s from './Icons.module.scss';
+import Widget from "../../components/Widget";
+import s from "./Icons.module.scss";
 
 const iconEntries = [
-  ['Alarm', AlarmIcon],
-  ['AppIndicator', AppIndicatorIcon],
-  ['Archive', ArchiveIcon],
-  ['ArrowClockwise', ArrowClockwiseIcon],
-  ['BarChart', BarChartIcon],
-  ['Bell', BellIcon],
-  ['Binoculars', BinocularsIcon],
-  ['Bookmark', BookmarkIcon],
-  ['Briefcase', BriefcaseIcon],
-  ['BrowserChrome', BrowserChromeIcon],
-  ['CalendarEvent', CalendarEventIcon],
-  ['Camera', CameraIcon],
-  ['ChatSquareText', ChatSquareTextIcon],
-  ['CheckCircle', CheckCircleIcon],
-  ['ClipboardData', ClipboardDataIcon],
-  ['Cloud', CloudIcon],
-  ['Cpu', CpuIcon],
-  ['Display', DisplayIcon],
-  ['Download', DownloadIcon],
-  ['Envelope', EnvelopeIcon],
-  ['ExclamationTriangle', ExclamationTriangleIcon],
-  ['Eye', EyeIcon],
-  ['FileEarmarkText', FileEarmarkTextIcon],
-  ['Filter', FilterIcon],
-  ['Flag', FlagIcon],
-  ['Folder', FolderIcon],
-  ['Gear', GearIcon],
-  ['GeoAlt', GeoAltIcon],
-  ['Globe', GlobeIcon],
-  ['Grid', GridIcon],
-  ['Heart', HeartIcon],
-  ['House', HouseIcon],
-  ['Image', ImageIcon],
-  ['Inbox', InboxIcon],
-  ['Kanban', KanbanIcon],
-  ['Lightning', LightningIcon],
-  ['Lock', LockIcon],
-  ['Map', MapIcon],
-  ['MoonStars', MoonStarsIcon],
-  ['Palette', PaletteIcon],
-  ['People', PeopleIcon],
-  ['PieChart', PieChartIcon],
-  ['PinMap', PinMapIcon],
-  ['Search', SearchIcon],
-  ['ShieldCheck', ShieldCheckIcon],
-  ['Sliders', SlidersIcon],
-  ['Star', StarIcon],
-  ['Telephone', TelephoneIcon],
-  ['Terminal', TerminalIcon],
-  ['Trash', TrashIcon],
-  ['Trophy', TrophyIcon],
-  ['Upload', UploadIcon],
-  ['Wifi', WifiIcon],
-  ['Wrench', WrenchIcon],
+  ["Alarm", AlarmIcon],
+  ["AppIndicator", AppIndicatorIcon],
+  ["Archive", ArchiveIcon],
+  ["ArrowClockwise", ArrowClockwiseIcon],
+  ["BarChart", BarChartIcon],
+  ["Bell", BellIcon],
+  ["Binoculars", BinocularsIcon],
+  ["Bookmark", BookmarkIcon],
+  ["Briefcase", BriefcaseIcon],
+  ["BrowserChrome", BrowserChromeIcon],
+  ["CalendarEvent", CalendarEventIcon],
+  ["Camera", CameraIcon],
+  ["ChatSquareText", ChatSquareTextIcon],
+  ["CheckCircle", CheckCircleIcon],
+  ["ClipboardData", ClipboardDataIcon],
+  ["Cloud", CloudIcon],
+  ["Cpu", CpuIcon],
+  ["Display", DisplayIcon],
+  ["Download", DownloadIcon],
+  ["Envelope", EnvelopeIcon],
+  ["ExclamationTriangle", ExclamationTriangleIcon],
+  ["Eye", EyeIcon],
+  ["FileEarmarkText", FileEarmarkTextIcon],
+  ["Filter", FilterIcon],
+  ["Flag", FlagIcon],
+  ["Folder", FolderIcon],
+  ["Gear", GearIcon],
+  ["GeoAlt", GeoAltIcon],
+  ["Globe", GlobeIcon],
+  ["Grid", GridIcon],
+  ["Heart", HeartIcon],
+  ["House", HouseIcon],
+  ["Image", ImageIcon],
+  ["Inbox", InboxIcon],
+  ["Kanban", KanbanIcon],
+  ["Lightning", LightningIcon],
+  ["Lock", LockIcon],
+  ["Map", MapIcon],
+  ["MoonStars", MoonStarsIcon],
+  ["Palette", PaletteIcon],
+  ["People", PeopleIcon],
+  ["PieChart", PieChartIcon],
+  ["PinMap", PinMapIcon],
+  ["Search", SearchIcon],
+  ["ShieldCheck", ShieldCheckIcon],
+  ["Sliders", SlidersIcon],
+  ["Star", StarIcon],
+  ["Telephone", TelephoneIcon],
+  ["Terminal", TerminalIcon],
+  ["Trash", TrashIcon],
+  ["Trophy", TrophyIcon],
+  ["Upload", UploadIcon],
+  ["Wifi", WifiIcon],
+  ["Wrench", WrenchIcon],
 ];
 
 const toIconSlug = (name) =>
   name
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/([A-Z])([A-Z][a-z])/g, "$1-$2")
     .toLowerCase();
 
 const Icons = () => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
 
   const filteredIcons = useMemo(() => {
@@ -140,7 +139,9 @@ const Icons = () => {
       return iconEntries;
     }
 
-    return iconEntries.filter(([name]) => name.toLowerCase().includes(normalizedQuery));
+    return iconEntries.filter(([name]) =>
+      name.toLowerCase().includes(normalizedQuery),
+    );
   }, [deferredQuery]);
 
   return (
@@ -151,12 +152,13 @@ const Icons = () => {
       </Breadcrumb>
       <h1 className="mb-lg">Icons</h1>
       <Widget
-        title={(
+        title={
           <div className="d-flex flex-column gap-3">
             <div>
               <h5 className="mt-0 mb-1">Bootstrap icon explorer</h5>
               <p className="mb-0 text-muted">
-                Live filter uses React 19 deferred rendering so large icon sets stay responsive.
+                Live filter uses React 19 deferred rendering so large icon sets
+                stay responsive.
               </p>
             </div>
             <Input
@@ -169,7 +171,7 @@ const Icons = () => {
               value={query}
             />
           </div>
-        )}
+        }
       >
         <Row className="icon-list">
           {filteredIcons.map(([name, IconComponent]) => (
