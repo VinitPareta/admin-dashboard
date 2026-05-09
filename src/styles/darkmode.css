@@ -1,0 +1,314 @@
+body.dark-mode {
+  background-color: #0d0d0d !important;
+  color: #f0f0f0 !important;
+}
+
+/* ── NAVBAR / HEADER ── */
+body.dark-mode [class*="root"] .navbar,
+body.dark-mode header {
+  background-color: #141414 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* header icon buttons */
+body.dark-mode [class*="headerIcon"] .btn {
+  background: #141414 !important;
+  color: #f0f0f0 !important;
+}
+
+/* search input */
+body.dark-mode .input-group {
+  background-color: #1e1e1e !important;
+}
+
+body.dark-mode .input-group input {
+  color: #f0f0f0 !important;
+  background: transparent !important;
+}
+
+body.dark-mode .input-group input::placeholder {
+  color: #666 !important;
+}
+
+/* ── SIDEBAR ── */
+body.dark-mode nav[class*="root"],
+body.dark-mode aside,
+body.dark-mode [class*="sidebar"],
+body.dark-mode [class*="Sidebar"] {
+  background-color: #141414 !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-mode [class*="sidebar"] a,
+body.dark-mode [class*="sidebar"] button,
+body.dark-mode [class*="nav"] a {
+  color: #999999 !important;
+}
+
+body.dark-mode [class*="sidebar"] a:hover,
+body.dark-mode [class*="sidebar"] a[class*="active"],
+body.dark-mode [class*="sidebar"] a.active {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+body.dark-mode [class*="logo"],
+body.dark-mode [class*="Logo"] {
+  background-color: #141414 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ── MAIN CONTENT ── */
+body.dark-mode main,
+body.dark-mode [class*="content"],
+body.dark-mode [class*="wrap"] {
+  background-color: #0d0d0d !important;
+}
+
+/* ── CARDS & WIDGETS ── */
+body.dark-mode .card,
+body.dark-mode [class*="widget"],
+body.dark-mode [class*="Widget"] {
+  background-color: #141414 !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .card-header,
+body.dark-mode [class*="widget"] h5,
+body.dark-mode [class*="Widget"] h5 {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #f0f0f0 !important;
+}
+
+/* ── TABLES ── */
+body.dark-mode .table {
+  color: #e0e0e0 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+body.dark-mode .table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .table > :not(caption) > * > * {
+  background-color: transparent !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .table-dark,
+body.dark-mode thead.table-dark th {
+  background-color: #1e1e1e !important;
+  color: #f0f0f0 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ── FORMS & INPUTS ── */
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+  background-color: #1e1e1e !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+  background-color: #1e1e1e !important;
+  border-color: #e53e3e !important;
+  color: #f0f0f0 !important;
+  box-shadow: 0 0 0 0.2rem rgba(229, 62, 62, 0.2) !important;
+}
+
+body.dark-mode .form-control::placeholder {
+  color: #666 !important;
+}
+
+/* ── DROPDOWNS ── */
+body.dark-mode .dropdown-menu {
+  background-color: #141414 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8) !important;
+}
+
+body.dark-mode .dropdown-item {
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .dropdown-item:hover,
+body.dark-mode .dropdown-item:focus {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: #fff !important;
+}
+
+body.dark-mode .dropdown-item:active {
+  background-color: #e53e3e !important;
+  color: #fff !important;
+}
+
+/* ── MODALS ── */
+body.dark-mode .modal-content {
+  background-color: #141414 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+body.dark-mode .modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+body.dark-mode .modal-title {
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1) !important;
+}
+
+/* ── ALERTS ── */
+body.dark-mode .alert-light {
+  background-color: #1e1e1e !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #e0e0e0 !important;
+}
+
+/* ── TEXT ── */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .text-muted {
+  color: #666 !important;
+}
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode td,
+body.dark-mode th,
+body.dark-mode label {
+  color: #e0e0e0 !important;
+}
+
+/* ── BREADCRUMB ── */
+body.dark-mode .breadcrumb-item,
+body.dark-mode .breadcrumb-item.active,
+body.dark-mode .breadcrumb-item + .breadcrumb-item::before {
+  color: #666 !important;
+}
+
+/* ── FOOTER ── */
+body.dark-mode footer,
+body.dark-mode [class*="footer"],
+body.dark-mode [class*="Footer"] {
+  background-color: #141414 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  color: #666 !important;
+}
+
+/* ── BADGES ── */
+body.dark-mode .badge.bg-success {
+  background-color: #2d6a4f !important;
+}
+
+body.dark-mode .badge.bg-danger {
+  background-color: #9b2335 !important;
+}
+
+/* ── SCROLLBAR ── */
+body.dark-mode ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* ── BUTTONS ── */
+body.dark-mode .btn-default,
+body.dark-mode .btn-light {
+  background-color: #1e1e1e !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .btn-danger {
+  background-color: #e53e3e !important;
+}
+body.dark-mode .btn-primary {
+  background-color: #3b82f6 !important;
+}
+body.dark-mode .btn-success {
+  background-color: #22c55e !important;
+}
+body.dark-mode .btn-warning {
+  background-color: #f59e0b !important;
+}
+
+/* ── QUILL EDITOR ── */
+body.dark-mode .ql-toolbar {
+  background-color: #1e1e1e !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .ql-container {
+  background-color: #141414 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .ql-editor {
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .ql-stroke {
+  stroke: #aaa !important;
+}
+
+body.dark-mode .ql-fill {
+  fill: #aaa !important;
+}
+/* ── SIDEBAR LINKS FIX ── */
+
+/* default link color */
+body.dark-mode [class*="headerLink"] a,
+body.dark-mode [class*="headerLink"] button {
+  color: #999999 !important;
+}
+
+/* hover - show red accent instead of white */
+body.dark-mode [class*="headerLink"] a:hover,
+body.dark-mode [class*="headerLink"] a:hover span,
+body.dark-mode [class*="headerLink"] a:hover div,
+body.dark-mode [class*="headerLink"] button:hover,
+body.dark-mode [class*="headerLink"] button:hover span,
+body.dark-mode [class*="headerLink"] button:hover div {
+  color: #e53e3e !important;
+  background-color: rgba(229, 62, 62, 0.08) !important;
+}
+
+/* active link */
+body.dark-mode [class*="headerLinkActive"],
+body.dark-mode [class*="headerLinkActive"] span,
+body.dark-mode [class*="headerLinkActive"] div {
+  color: #e53e3e !important;
+}

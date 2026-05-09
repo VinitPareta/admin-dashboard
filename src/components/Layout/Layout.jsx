@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import cx from 'classnames';
-import { Outlet, useLocation, useNavigation } from 'react-router-dom';
+import React, { useEffect } from "react";
+import cx from "classnames";
+import { Outlet, useLocation, useNavigation } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { closeSidebar, toggleSidebar } from '../../features/ui/uiSlice';
-import Footer from '../Footer';
-import Header from '../Header';
-import Sidebar from '../Sidebar';
-import s from './Layout.module.scss';
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { closeSidebar, toggleSidebar } from "../../features/ui/uiSlice";
+import Footer from "../Footer";
+import Header from "../Header";
+import Sidebar from "../Sidebar";
+import s from "./Layout.module.scss";
 
 const Layout = () => {
   const dispatch = useAppDispatch();
@@ -26,10 +26,17 @@ const Layout = () => {
       </a>
       <Sidebar />
       <div className={cx(s.wrap, { [s.sidebarOpen]: sidebarOpen })}>
-        <Header sidebarOpen={sidebarOpen} sidebarToggle={() => dispatch(toggleSidebar())} />
+        <Header
+          sidebarOpen={sidebarOpen}
+          sidebarToggle={() => dispatch(toggleSidebar())}
+        />
         <main className={s.content} id="main-content" tabIndex={-1}>
-          {navigation.state !== 'idle' ? (
-            <div aria-live="polite" className="alert alert-light border mb-lg" role="status">
+          {navigation.state !== "idle" ? (
+            <div
+              aria-live="polite"
+              className="alert alert-light border mb-lg"
+              role="status"
+            >
               Updating route content...
             </div>
           ) : null}

@@ -1,4 +1,4 @@
-@use '../../styles/app' as *;
+@use "../../styles/app" as *;
 
 .root {
   width: $sidebar-width-open;
@@ -26,4 +26,20 @@
 .nav {
   padding: 10px 0;
   overflow-y: auto;
+}
+/* ── SIDEBAR HOVER FIX ── */
+body.dark-mode [class*="nav"] a:hover,
+body.dark-mode [class*="nav"] a:hover span,
+body.dark-mode [class*="nav"] a:hover * {
+  color: #e53e3e !important; /* red accent on hover */
+  background-color: rgba(229, 62, 62, 0.08) !important;
+}
+
+/* active link */
+body.dark-mode [class*="nav"] a[class*="active"],
+body.dark-mode [class*="nav"] a.active,
+body.dark-mode [class*="nav"] a[class*="active"] span,
+body.dark-mode [class*="nav"] a[class*="active"] * {
+  color: #e53e3e !important;
+  background-color: rgba(229, 62, 62, 0.1) !important;
 }

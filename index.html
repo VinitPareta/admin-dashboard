@@ -12,6 +12,14 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- ✅ fix for aria-hidden click blocking issue -->
+    <script>
+      document.addEventListener("click", function () {
+        document.getElementById("root")?.removeAttribute("aria-hidden");
+      });
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

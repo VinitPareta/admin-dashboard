@@ -35,7 +35,7 @@
     "reactstrap": "^9.2.3",
     "recharts": "^3.8.1",
     "sass": "^1.98.0",
-    "sweetalert2": "^11.26.24"
+    "sweetalert2": "^11.7.32"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

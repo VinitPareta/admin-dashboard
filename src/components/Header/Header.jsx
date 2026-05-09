@@ -6,18 +6,23 @@ import {
   Envelope,
   Gear,
   List,
+  Moon,
   Search,
+  Sun,
 } from "react-bootstrap-icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { logoutUser } from "../../features/auth/authSlice";
+import { useTheme } from "../../context/ThemeContext"; // ✅ import theme hook
 import photo from "../../images/photo.jpg";
 import s from "./Header.module.scss";
 
 const Header = ({ sidebarOpen, sidebarToggle }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const session = useAppSelector((state) => state.auth.session);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { isDark, toggleTheme } = useTheme(); // ✅ get theme state and toggle
 
   const adminName = useMemo(
     () => session?.user.name ?? "Administrator",
@@ -71,6 +76,24 @@ const Header = ({ sidebarOpen, sidebarToggle }) => {
             <Gear aria-hidden="true" size={18} />
           </button>
         </div>
+
+        {/* ✅ DARK MODE TOGGLE BUTTON */}
+        <div className={s.headerIcon}>
+          <button
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            className="btn"
+            type="button"
+            onClick={toggleTheme}
+            title={isDark ? "Light mode" : "Dark mode"}
+          >
+            {isDark ? (
+              <Sun aria-hidden="true" size={18} /> // show sun in dark mode
+            ) : (
+              <Moon aria-hidden="true" size={18} /> // show moon in light mode
+            )}
+          </button>
+        </div>
+
         <div className="dropdown">
           <button
             aria-expanded={dropdownOpen}
@@ -97,13 +120,6 @@ const Header = ({ sidebarOpen, sidebarToggle }) => {
             })}
             role="menu"
           >
-            {/* <NavLink
-              className="dropdown-item"
-              to="/app/posts"
-              onClick={() => setDropdownOpen(false)}
-            >
-              Posts
-            </NavLink> */}
             <NavLink
               className="dropdown-item"
               to="/app/profile"
@@ -111,18 +127,12 @@ const Header = ({ sidebarOpen, sidebarToggle }) => {
             >
               Profile
             </NavLink>
-            {/* <NavLink
-              className="dropdown-item"
-              to="/app/user"
-              onClick={() => setDropdownOpen(false)}
-            >
-              Users
-            </NavLink> */}
             <button
               className="dropdown-item"
               onClick={() => {
                 setDropdownOpen(false);
                 dispatch(logoutUser());
+                navigate("/login");
               }}
               type="button"
             >
