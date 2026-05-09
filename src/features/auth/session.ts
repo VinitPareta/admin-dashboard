@@ -90,27 +90,27 @@ export const createSession = async ({
 
   return session;
 };
-// export const createDemoSession = async ({
-//   login,
-//   password,
-// }: LoginCredentials): Promise<Session> => {
-//   await new Promise((resolve) => window.setTimeout(resolve, 300));
+export const createDemoSession = async ({
+  login,
+  password,
+}: LoginCredentials): Promise<Session> => {
+  await new Promise((resolve) => window.setTimeout(resolve, 300));
 
-//   if (login !== "user" || password !== "password") {
-//     throw new Error("Use demo credentials: user / password");
-//   }
+  if (login !== "user" || password !== "password") {
+    throw new Error("Use demo credentials: user / password");
+  }
 
-//   const session: Session = {
-//     token: crypto.randomUUID(),
-//     user: {
-//       id: "demo-user",
-//       login,
-//       name: "Administrator",
-//     },
-//     expiresAt: new Date(Date.now() + SESSION_TTL_MS).toISOString(),
-//   };
+  const session: Session = {
+    token: crypto.randomUUID(),
+    user: {
+      id: "demo-user",
+      login,
+      name: "Administrator",
+    },
+    expiresAt: new Date(Date.now() + SESSION_TTL_MS).toISOString(),
+  };
 
-//   localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
+  localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
 
-//   return session;
-// };
+  return session;
+};
